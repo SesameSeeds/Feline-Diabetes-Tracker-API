@@ -4,7 +4,9 @@ class GlucoseController < ApplicationController
   end
 
   def create
-    if Glucose.create(glucose_params)
+    puts 'params'
+    glucose = Glucose.new(glucose_params)
+    if glucose.save
       render :json => {:message => "Success!"}
     else
       render :json => {:message => "Not a Success!"}
