@@ -1,6 +1,8 @@
 class GlucoseController < ApplicationController
+
   def index
-    render :json => []
+    @glucose = Glucose.all(glucose_params[:level])
+    render :json => @glucose
   end
 
   def create
@@ -13,7 +15,17 @@ class GlucoseController < ApplicationController
     end
   end
 
+  def show
+    @glucose = Glucose.find(glucose_params[:level])
+    render :json => {ok: true}
+  end
+
+
   private
+
+  def render_404
+    render file: "/public/404.html", status: 404
+  end
 
   def glucose_params
     params.require(:glucose).permit(:level)
