@@ -1,13 +1,14 @@
 class GlucoseController < ApplicationController
 
   def index
-    @glucose = Glucose.all(glucose_params[:level])
+    @glucose = Glucose.all
     render :json => @glucose
+    # render :json => []
   end
 
   def create
     puts 'params'
-    glucose = Glucose.new(glucose_params)
+    glucose = Glucose.new(glucose_post_params)
     if glucose.save
       render :json => {:message => "Success!"}
     else
@@ -16,7 +17,7 @@ class GlucoseController < ApplicationController
   end
 
   def show
-    @glucose = Glucose.find(glucose_params[:level])
+    @glucose = Glucose.find(glucose_get_params[:level])
     render :json => {ok: true}
   end
 
@@ -27,7 +28,11 @@ class GlucoseController < ApplicationController
     render file: "/public/404.html", status: 404
   end
 
-  def glucose_params
+  def glucose_post_params
     params.require(:glucose).permit(:level)
+  end
+
+  def glucose_get_params
+    params.require()
   end
 end
