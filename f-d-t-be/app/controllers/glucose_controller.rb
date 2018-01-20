@@ -3,7 +3,6 @@ class GlucoseController < ApplicationController
   def index
     @glucose = Glucose.all
     render :json => @glucose
-    # render :json => []
   end
 
   def create
@@ -19,6 +18,11 @@ class GlucoseController < ApplicationController
   def show
     @glucose = Glucose.find(glucose_get_params[:level])
     render :json => {ok: true}
+  end
+
+  def destroy
+    @glucose= Glucose.find_by(id: glucose_get_params[:id]).destroy
+
   end
 
 
