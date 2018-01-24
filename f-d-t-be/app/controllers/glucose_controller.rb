@@ -21,8 +21,7 @@ class GlucoseController < ApplicationController
   end
 
   def destroy
-    @glucose= Glucose.find_by(id: glucose_get_params[:id]).destroy
-
+    @glucose= Glucose.find_by(id: params[:id]).destroy
   end
 
 
@@ -36,7 +35,4 @@ class GlucoseController < ApplicationController
     params.require(:glucose).permit(:level)
   end
 
-  def glucose_get_params
-    params.require()
-  end
 end
